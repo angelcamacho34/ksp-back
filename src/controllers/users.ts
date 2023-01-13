@@ -1,12 +1,16 @@
 import { User } from "../common/models";
 import { api_response_error } from "../common/utils";
 import { createUser, deleteUser, getAllUsers, updateUser } from "../libraries/users";
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const baseURL = '/api/v1/users';
 module.exports = (app) => {
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+    app.use(cors({
+        origin: '*'
+    }));
 
     app.get(`${baseURL}/getAll`, (req, res) => {
         // #swagger.tags = ['Users']
